@@ -31,4 +31,5 @@ public interface UserDao {
 
     @Update
     public void updateUsers(User... users);
+
 }

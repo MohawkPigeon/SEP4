@@ -3,7 +3,7 @@ package com.example.sep4;
 import java.util.ArrayList;
 import java.util.Observer;
 
-public class Room {
+public class Room_simple {
     private ArrayList<SensorData> sData;
     private HardwareUnit hunit;
     private int RoomID;
@@ -12,7 +12,7 @@ public class Room {
     private int min;
     private int max;
 
-    public Room(ArrayList<SensorData> sData, HardwareUnit hunit, int roomID, String navn, Enum sensor, int min, int max) {
+    public Room_simple(ArrayList<SensorData> sData, HardwareUnit hunit, int roomID, String navn, Enum sensor, int min, int max) {
         this.sData = sData;
         this.hunit = hunit;
         RoomID = roomID;

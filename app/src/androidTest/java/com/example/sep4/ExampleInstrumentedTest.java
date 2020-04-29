@@ -2,11 +2,13 @@ package com.example.sep4;
 
 import android.content.Context;
 
+import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.sep4.FileManager.AppDatabase;
+import com.example.sep4.FileManager.User;
 import com.example.sep4.FileManager.UserDao;
 
 import org.junit.After;
@@ -15,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -30,6 +33,7 @@ public class ExampleInstrumentedTest {
     private UserDao userDao;
     private AppDatabase db;
 
+
     @Before
     public void createDb() {
         Context context = ApplicationProvider.getApplicationContext();
@@ -44,11 +48,13 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void writeUserAndReadInList() throws Exception {
-        User user = TestUtil.createUser(3);
+
+        com.example.sep4.FileManager.User user = new com.example.sep4.FileManager.User(0, "bob","123");
         user.setUsername("george");
         userDao.insert(user);
-        List<User> byName = (List<User>) userDao.findByName("george","123");
-        assertThat(byName.get(0), equalTo(user));
+        User byName = userDao.findByName("george","123");
+        assertThat(byName.password, equalTo(user.password));
+        assertEquals(byName.username, user.username);
     }
 
     @Test
