@@ -55,6 +55,13 @@ public class ExampleInstrumentedTest {
         User byName = userDao.findByName("george","123");
         assertThat(byName.password, equalTo(user.password));
         assertEquals(byName.username, user.username);
+
+        com.example.sep4.FileManager.User user1 = new com.example.sep4.FileManager.User(1, "bob1","1234");
+        userDao.insert(user1);
+        user1.setUsername("greg");
+        userDao.updateUsers(user1);
+        assertEquals(userDao.getAll().get(1).username, user1.username);
+
     }
 
     @Test
