@@ -6,11 +6,12 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 //@Entity(primaryKeys = {"username", "password"})
-@Entity
+@Entity(tableName = "user")
 public class User {
 
     @NonNull
-    @PrimaryKey
+    @PrimaryKey()
+    @ColumnInfo(name = "id")
     public int id;
 
     @NonNull
@@ -29,10 +30,6 @@ public class User {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @NonNull

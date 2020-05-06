@@ -8,6 +8,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.sep4.FileManager.AppDatabase;
+import com.example.sep4.FileManager.BaseDao;
 import com.example.sep4.FileManager.User;
 import com.example.sep4.FileManager.UserDao;
 
@@ -49,18 +50,27 @@ public class ExampleInstrumentedTest {
     @Test
     public void writeUserAndReadInList() throws Exception {
 
-        com.example.sep4.FileManager.User user = new com.example.sep4.FileManager.User(0, "bob","123");
+        com.example.sep4.FileManager.User user = new com.example.sep4.FileManager.User(1,"bob","123");
         user.setUsername("george");
         userDao.insert(user);
         User byName = userDao.findByName("george","123");
         assertThat(byName.password, equalTo(user.password));
         assertEquals(byName.username, user.username);
 
-        com.example.sep4.FileManager.User user1 = new com.example.sep4.FileManager.User(1, "bob1","1234");
+        com.example.sep4.FileManager.User user1 = new com.example.sep4.FileManager.User(2,"bob1","1234");
         userDao.insert(user1);
-        user1.setUsername("greg");
-        userDao.updateUsers(user1);
-        assertEquals(userDao.getAll().get(1).username, user1.username);
+
+        int intarray[]= new int[]{1,2};
+        assertEquals(userDao.loadAllByIds(intarray).get(1).id, 2);
+
+        user1.setUsername("kent");
+        userDao.update(user1);
+        assertEquals(userDao.loadAllByIds(intarray).get(1).username, "kent");
+
+        userDao.delete(user1);
+        userDao.delete(user);
+        assertEquals(0,userDao.getAll().size());
+
 
     }
 
