@@ -1,3 +1,9 @@
+package com.example.supermegatron4000;
+
+import android.widget.Toast;
+import com.example.supermegatron4000.User;
+import com.example.supermegatron4000.Room;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -14,18 +20,20 @@ import retrofit2.http.Path;
 
 public class ConnectionManager {
 
-    String URL = "database";
+    String URL = "klc/api/";
     Retrofit retrofit;
+    roomService rS;
 
     public ConnectionManager(){
         retrofit = new retrofit2.Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        rS = retrofit.create(Room.class);
     }
 
     boolean hasConnection(){
-
+        return true;
     }
 
     void login(){
@@ -40,14 +48,56 @@ public class ConnectionManager {
     }
 
     /*Room CRUD*/
-    private void create(Room room){
+    /*private void create(Room room){
         Room service = retrofit.create(Room.class);
         Call<Room> r = service.createRoom(room);
+    }*/
+
+    private List<Room> readAll(Room room) {
+
+        Call<List<Room>> r = rS.getAllRooms();
+
+        int[] i = {};
+        List<Room>[] rooms = new List<Room>;
+
+
+
+        r.enqueue(new Callback<List<Room>>() {
+            @Override
+            public void onResponse(Call<List<Room>> call, Response<List<Room>> response) {
+                if (response.isSuccessful()) {
+                    rooms[0] = response.body();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Room>> call, Throwable t) {
+                System.out.println("Call faliled recieved: " + t);
+            }
+        });
+        return rooms[0];
     }
-    private Room read(Room room){
-        Room service = retrofit.create(Room.class);
-        Call<List<Room>> r = service.getRoom(room.getId());
-        return r;
+    /*private Room read(Room room){
+
+        Call<List<Room>> r = roomService.getRoom(room.getId());
+        List<Room> rooms;
+
+        r.enqueue(new Callback<List<Room>>() {
+            @Override
+            public void onResponse(Call<List<Room>> call, Response<List<Room>> response) {
+                if(response.isSuccessful()){
+                    List<Room> rooms = response.body();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Room>> call, Throwable t) {
+                List<Room> rooms = null;
+                System.out.println("Call faliled recieved: " + t);
+            }
+        });
+
+        return rooms;
     }
     private void update(String roomId, Room room){
         Room service = retrofit.create(Room.class);
@@ -56,34 +106,35 @@ public class ConnectionManager {
     private void delete(String roomId){
         Room service = retrofit.create(Room.class);
         Call<Room> r = service.deleteRoom(roomId);
-    }
+    }*/
 
     /*User CRUD*/
+        /*
     private void create(User user){
         User service = retrofit.create(User.class);
         Call<User> u = service.createUser(user);
     }
     private User read(User user){
         User service = retrofit.create(User.class);
-        Call<List<User>> user = service.getUser(userId);
+        Call<List<User>> u = service.getUser(user.getId);
         return service;
     }
-    private void update(String roomId, Room room){
+    private void update(String userId, User user){
         Room service = retrofit.create(Room.class);
-        Call<Room> r = service.updateRoom(roomId, room);
+        Call<Room> r = service.updateRoom(userId, user);
     }
     private void delete(String roomId){
         Room service = retrofit.create(Room.class);
         Call<Room> r = service.deleteRoom(roomId);
-    }
+    }*/
+}
 
-
-    public interface Room{
+    public interface roomService{
         @POST("rooms/new")
         Call<Room> createRoom(@Body Room room);
 
-        @GET("rooms")
-        Call<List<Room>> getAllRooms (@Path("rooms") String room);
+        @GET("room")
+        Call<List<Room>> getAllRooms ();
 
         @GET("rooms/{room}")
         Call<List<Room>> getRoom (@Path("room") String room);
@@ -143,5 +194,3 @@ public class ConnectionManager {
         @DELETE("delete/{id}")
         Call<Action> deleteAction(@Path("id") String id);
     }
-
-}
