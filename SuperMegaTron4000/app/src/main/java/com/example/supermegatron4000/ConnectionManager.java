@@ -1,3 +1,4 @@
+/*
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,7 +40,9 @@ public class ConnectionManager {
 
     }
 
-    /*Room CRUD*/
+    */
+/*Room CRUD*//*
+
     private void create(Room room){
         Room service = retrofit.create(Room.class);
         Call<Room> r = service.createRoom(room);
@@ -58,7 +61,9 @@ public class ConnectionManager {
         Call<Room> r = service.deleteRoom(roomId);
     }
 
-    /*User CRUD*/
+    */
+/*User CRUD*//*
+
     private void create(User user){
         User service = retrofit.create(User.class);
         Call<User> u = service.createUser(user);
@@ -145,3 +150,4 @@ public class ConnectionManager {
     }
 
 }
+*/

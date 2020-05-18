@@ -1,4 +1,4 @@
-package com.example.logappdev2;
+/*package com.example.logappdev2;
 
 public class ReferenceManager {
 
@@ -30,4 +30,4 @@ public class ReferenceManager {
 
         }
     }
-}
+}*/

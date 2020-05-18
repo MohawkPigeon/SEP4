@@ -1,4 +1,4 @@
-package com.example.logappdev2;
+package com.example.supermegatron4000;
 
 public class DataManager {
 

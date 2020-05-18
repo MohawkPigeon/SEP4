@@ -1,3 +1,42 @@
 <resources>
-    <string name="app_name">SuperMegaTron4000</string>
+    <string name="app_name">Sensor</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_1">Rooms</string>
+    <string name="tab_text_2">Actions</string>
+    <string name="tab_text_3">Settings</string>
+    <string name="Room1">Room 1</string>
+    <string name="Room2">Room 2</string>
+    <string name="Room3">Room 3</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home_page">HomePage</string>
+
+    <string-array name="RoomList">
+        <item>Room 1</item>
+        <item>Room 2</item>
+        <item>Room 3</item>
+        <item>Room 4</item>
+        <item>Room 5</item>
+        <item>Room 6</item>
+        <item>Room 7</item>
+        <item>Room 8</item>
+        <item>Room 9</item>
+        <item>Room 10</item>
+        <item>Room 11</item>
+        <item>Room 12</item>
+        <item>Room 13</item>
+        <item>Room 14</item>
+    </string-array>
+
+    <string-array name="ActionsList">
+        <item>Action 1</item>
+        <item>Action 2</item>
+        <item>Action 3</item>
+        <item>Action 4</item>
+        <item>Action 5</item>
+        <item>Action 6</item>
+        <item>Action 7</item>
+        <item>Action 8</item>
+    </string-array>
 </resources>

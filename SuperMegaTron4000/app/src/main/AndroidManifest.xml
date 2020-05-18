@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.supermegatron4000.view.activities.InstallerActivity"></activity>
+        <activity android:name="com.example.supermegatron4000.view.activities.ActionActivity" />
+        <activity android:name="com.example.supermegatron4000.view.activities.RoomActivity" />
+        <activity
+            android:name="com.example.supermegatron4000.view.activities.HomePage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.example.supermegatron4000.view.activities.LoginView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,5 +23,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>

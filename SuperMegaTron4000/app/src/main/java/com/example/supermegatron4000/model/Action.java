@@ -1,4 +1,4 @@
-package com.example.sep4;
+package com.example.supermegatron4000.model;
 
 public class Action {
     public int ActionID;
