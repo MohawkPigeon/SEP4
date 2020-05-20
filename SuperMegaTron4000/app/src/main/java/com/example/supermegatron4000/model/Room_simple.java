@@ -1,25 +1,36 @@
 package com.example.supermegatron4000.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observer;
 
-public class Room_simple {
-    private ArrayList<SensorData> sData;
+public class Room_simple implements Serializable {
+    @SerializedName("sensorData")
+    @Expose private ArrayList<SensorData> sData;
+
     private HardwareUnit hunit;
-    private int RoomID;
-    private String navn;
+
+    @SerializedName("roomID")
+    @Expose private int RoomID;
+
+    @SerializedName("sensorData")
+    @Expose private String navn;
+
     private Enum Sensor;
     private int min;
     private int max;
 
     public Room_simple(ArrayList<SensorData> sData, HardwareUnit hunit, int roomID, String navn, Enum sensor, int min, int max) {
         this.sData = sData;
-        this.hunit = hunit;
-        RoomID = roomID;
+        //this.hunit = hunit;
+        this.RoomID = roomID;
         this.navn = navn;
-        Sensor = sensor;
-        this.min = min;
-        this.max = max;
+        //this.Sensor = sensor;
+        //this.min = min;
+        //this.max = max;
     }
 
     public ArrayList<SensorData> getsData() {
