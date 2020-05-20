@@ -1,5 +1,5 @@
-/*
-package com.example.sep4.FileManager;
+
+package com.example.supermegatron4000.FileManager;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -52,4 +52,3 @@ public class User {
     }
 }
 
-*/

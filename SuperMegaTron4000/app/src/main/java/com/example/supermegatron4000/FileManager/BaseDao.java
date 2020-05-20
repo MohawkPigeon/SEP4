@@ -1,5 +1,5 @@
-/*
-package com.example.sep4.FileManager;
+
+package com.example.supermegatron4000.FileManager;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -19,4 +19,4 @@ public interface BaseDao<T> {
 
     @Delete()
     void delete(T entity);
-}*/
+}
