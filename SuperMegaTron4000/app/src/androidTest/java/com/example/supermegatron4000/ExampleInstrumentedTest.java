@@ -32,7 +32,7 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.supermegatron4000", appContext.getPackageName());
+        assertEquals("com.example.logappdev2", appContext.getPackageName());
     }
 
 
