@@ -1,4 +1,4 @@
-/*package com.example.sep4.FileManager;
+package com.example.supermegatron4000.FileManager;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
@@ -7,4 +7,4 @@ import androidx.room.RoomDatabase;
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao UserDao();
 
-}*/
+}
