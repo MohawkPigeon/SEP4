@@ -21,6 +21,8 @@ public class ConnectionManager {
     String URL = "http://klc.one/api/";
     Retrofit retrofit;
     roomService rS;
+    List<Room_simple> delayhold;
+    final tmpRoomHold RoomHold = new tmpRoomHold();
 
     public ConnectionManager(){
         retrofit = new retrofit2.Retrofit.Builder()
@@ -31,6 +33,9 @@ public class ConnectionManager {
     }
     public List<Room_simple> getAllRooms(){
         return readAll();
+    }
+    public List<Room_simple> delayedGet(){
+        return RoomHold.getRoom();
     }
 
     /*boolean hasConnection(){
@@ -65,7 +70,6 @@ public class ConnectionManager {
 
         //int[] i = {};
         //List<Room_simple>[] rooms = new List<Room_simple>[1];
-        final tmpRoomHold RoomHold = new tmpRoomHold();
 
 
         r.enqueue(new Callback<List<Room_simple>>() {
