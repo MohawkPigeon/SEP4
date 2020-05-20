@@ -1,8 +1,6 @@
-package com.example.supermegatron4000;
+package com.example.supermegatron4000.ConnectionPack;
 
-import android.widget.Toast;
-import com.example.supermegatron4000.User;
-import com.example.supermegatron4000.Room;
+import com.example.supermegatron4000.model.Room_simple;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class ConnectionManager {
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        rS = retrofit.create(Room.class);
+        rS = retrofit.create(roomService.class);
     }
 
     boolean hasConnection(){
@@ -49,33 +47,38 @@ public class ConnectionManager {
 
     /*Room CRUD*/
     /*private void create(Room room){
+=======
+    */
+/*Room CRUD*//*
+
+    private void create(Room room){
         Room service = retrofit.create(Room.class);
         Call<Room> r = service.createRoom(room);
     }*/
 
-    private List<Room> readAll(Room room) {
+    private List<Room_simple> readAll(Room_simple room) {
 
-        Call<List<Room>> r = rS.getAllRooms();
+        Call<List<Room_simple>> r = rS.getAllRooms();
 
-        int[] i = {};
-        List<Room>[] rooms = new List<Room>;
+        //int[] i = {};
+        //List<Room_simple>[] rooms = new List<Room_simple>[1];
+        final tmpRoomHold RoomHold = new tmpRoomHold();
 
 
-
-        r.enqueue(new Callback<List<Room>>() {
+        r.enqueue(new Callback<List<Room_simple>>() {
             @Override
-            public void onResponse(Call<List<Room>> call, Response<List<Room>> response) {
+            public void onResponse(Call<List<Room_simple>> call, Response<List<Room_simple>> response) {
                 if (response.isSuccessful()) {
-                    rooms[0] = response.body();
+                    RoomHold.setRoom(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Room>> call, Throwable t) {
+            public void onFailure(Call<List<Room_simple>> call, Throwable t) {
                 System.out.println("Call faliled recieved: " + t);
             }
         });
-        return rooms[0];
+        return RoomHold.getRoom();
     }
     /*private Room read(Room room){
 
@@ -108,8 +111,14 @@ public class ConnectionManager {
         Call<Room> r = service.deleteRoom(roomId);
     }*/
 
+<<<<<<< HEAD
     /*User CRUD*/
         /*
+=======
+    */
+/*User CRUD*//*
+
+>>>>>>> 93dc03d2bff7d369117bc8331e947482d86ee2f6
     private void create(User user){
         User service = retrofit.create(User.class);
         Call<User> u = service.createUser(user);
@@ -129,68 +138,66 @@ public class ConnectionManager {
     }*/
 }
 
-    public interface roomService{
-        @POST("rooms/new")
-        Call<Room> createRoom(@Body Room room);
+interface roomService{
+    @POST("rooms/new")
+    Call<Room_simple> createRoom(@Body Room_simple room);
 
-        @GET("room")
-        Call<List<Room>> getAllRooms ();
+    @GET("room")
+    Call<List<Room_simple>> getAllRooms ();
 
-        @GET("rooms/{room}")
-        Call<List<Room>> getRoom (@Path("room") String room);
+    @GET("rooms/{room}")
+    Call<List<Room_simple>> getRoom (@Path("room") String room);
 
-        @PUT("update/{id}")
-        Call<Room> updateRoom(@Path("id") String id, @Body Room room);
+    @PUT("update/{id}")
+    Call<Room_simple> updateRoom(@Path("id") String id, @Body Room_simple room);
 
-        @DELETE("delete/{id}")
-        Call<Room> deleteRoom(@Path("id") String id);
-    }
+    @DELETE("delete/{id}")
+    Call<Room_simple> deleteRoom(@Path("id") String id);
+}
+interface User {
+    @POST("users/new")
+    Call<User> createUser(@Body User user);
 
-    public interface User{
-        @POST("users/new")
-        Call<User> createUser(@Body User user);
+    @GET("users/{user}")
+    Call<List<User>> getUser(@Path("user") String user);
 
-        @GET("users")
-        Call<List<Room>> getAllRooms (@Path("rooms") String room);
+    @PUT("update/{id}")
+    Call<User> updateUser(@Path("id") String id, @Body User user);
 
-        @GET("users/{user}")
-        Call<List<User>> getUser (@Path("user") String user);
+    @DELETE("delete/{id}")
+    Call<User> deleteUser(@Path("id") String id);
+}
+interface SensorData{
+    @POST("sensorData/new")
+    Call<SensorData> createSensorData(@Body SensorData sensorData);
 
-        @PUT("update/{id}")
-        Call<User> updateUser(@Path("id") String id, @Body User user);
+    @GET("sensorData")
+    Call<List<SensorData>> getAllSensorData (@Path("sensorData") String sensorData);
 
-        @DELETE("delete/{id}")
-        Call<User> deleteUser(@Path("id") String id);
-    }
-    public interface SensorData{
-        @POST("sensorData/new")
-        Call<SensorData> createSensorData(@Body SensorData sensorData);
+    @GET("sensorData/{sensorData}")
+    Call<List<SensorData>> getSensorData (@Path("sensorData") String sensorData);
 
-        @GET("sensorData")
-        Call<List<SensorData>> getAllSensorData (@Path("sensorData") String sensorData);
+    @PUT("update/{id}")
+    Call<SensorData> updateSensorData(@Path("id") String id, @Body SensorData sensorData);
 
-        @GET("sensorData/{sensorData}")
-        Call<List<SensorData>> getSensorData (@Path("sensorData") String sensorData);
+    @DELETE("delete/{id}")
+    Call<SensorData> deleteSensorData(@Path("id") String id);
+}
+interface Action{
+    @POST("action/new")
+    Call<Action> createAction(@Body Action action);
 
-        @PUT("update/{id}")
-        Call<SensorData> updateSensorData(@Path("id") String id, @Body SensorData sensorData);
+    @GET("action")
+    Call<List<Action>> getAllAction (@Path("action") String action);
 
-        @DELETE("delete/{id}")
-        Call<SensorData> deleteSensorData(@Path("id") String id);
-    }
-    public interface Action{
-        @POST("action/new")
-        Call<Action> createAction(@Body Action action);
+    @GET("action/{action}")
+    Call<List<Action>> getAction (@Path("action") String action);
 
-        @GET("action")
-        Call<List<Action>> getAllAction (@Path("action") String action);
+    @PUT("update/{id}")
+    Call<Action> updateAction(@Path("id") String id, @Body Action action);
 
-        @GET("action/{action}")
-        Call<List<Action>> getAction (@Path("action") String action);
+    @DELETE("delete/{id}")
+    Call<Action> deleteAction(@Path("id") String id);
+}
 
-        @PUT("update/{id}")
-        Call<Action> updateAction(@Path("id") String id, @Body Action action);
 
-        @DELETE("delete/{id}")
-        Call<Action> deleteAction(@Path("id") String id);
-    }

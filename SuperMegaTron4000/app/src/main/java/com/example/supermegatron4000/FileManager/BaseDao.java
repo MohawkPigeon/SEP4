@@ -1,3 +1,4 @@
+/*
 package com.example.sep4.FileManager;
 
 import androidx.room.Dao;
@@ -18,4 +19,4 @@ public interface BaseDao<T> {
 
     @Delete()
     void delete(T entity);
-}
+}*/

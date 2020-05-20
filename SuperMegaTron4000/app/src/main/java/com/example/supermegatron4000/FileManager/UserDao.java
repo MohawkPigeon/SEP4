@@ -1,3 +1,4 @@
+/*
 package com.example.sep4.FileManager;
 
 import androidx.room.Dao;
@@ -21,3 +22,4 @@ public abstract class UserDao implements BaseDao<User> {
     public abstract User findByName(String first, String last);
 
 }
+*/
