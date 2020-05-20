@@ -18,7 +18,7 @@ import retrofit2.http.Path;
 
 public class ConnectionManager {
 
-    String URL = "klc/api/";
+    String URL = "http://klc.one/api/";
     Retrofit retrofit;
     roomService rS;
 
@@ -28,6 +28,9 @@ public class ConnectionManager {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         rS = retrofit.create(roomService.class);
+    }
+    public List<Room_simple> getAllRooms(){
+        return readAll();
     }
 
     /*boolean hasConnection(){
@@ -56,7 +59,7 @@ public class ConnectionManager {
         Call<Room> r = service.createRoom(room);
     }*/
 
-    private List<Room_simple> readAll(Room_simple room) {
+    private List<Room_simple> readAll() {
 
         Call<List<Room_simple>> r = rS.getAllRooms();
 
@@ -70,12 +73,13 @@ public class ConnectionManager {
             public void onResponse(Call<List<Room_simple>> call, Response<List<Room_simple>> response) {
                 if (response.isSuccessful()) {
                     RoomHold.setRoom(response.body());
+                    //System.out.println(RoomHold.getRoom().get(0).getNavn());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Room_simple>> call, Throwable t) {
-                System.out.println("Call faliled recieved: " + t);
+                System.out.println("Call failed, recieved: " + t);
             }
         });
         return RoomHold.getRoom();

@@ -16,7 +16,7 @@ public class Room_simple implements Serializable {
     @SerializedName("roomID")
     @Expose private int RoomID;
 
-    @SerializedName("sensorData")
+    @SerializedName("name")
     @Expose private String navn;
 
     private Enum Sensor;
