@@ -30,7 +30,7 @@ public class ConnectionManager {
         rS = retrofit.create(roomService.class);
     }
 
-    boolean hasConnection(){
+    /*boolean hasConnection(){
         return true;
     }
 
@@ -43,7 +43,7 @@ public class ConnectionManager {
     }
     boolean append(Object obj){
 
-    }
+    }*/
 
     /*Room CRUD*/
     /*private void create(Room room){
@@ -111,14 +111,9 @@ public class ConnectionManager {
         Call<Room> r = service.deleteRoom(roomId);
     }*/
 
-<<<<<<< HEAD
     /*User CRUD*/
-        /*
-=======
-    */
-/*User CRUD*//*
 
->>>>>>> 93dc03d2bff7d369117bc8331e947482d86ee2f6
+/*User CRUD*//*
     private void create(User user){
         User service = retrofit.create(User.class);
         Call<User> u = service.createUser(user);
