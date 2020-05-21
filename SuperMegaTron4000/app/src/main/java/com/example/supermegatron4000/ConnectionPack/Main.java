@@ -8,6 +8,6 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         ConnectionManager cm = new ConnectionManager();
-        List<Room_simple> rs = cm.getAllRooms();
+
     }
 }

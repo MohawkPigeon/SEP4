@@ -1,5 +1,7 @@
 package com.example.supermegatron4000.ConnectionPack;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.supermegatron4000.model.Room_simple;
 
 import java.util.List;
@@ -31,8 +33,8 @@ public class ConnectionManager {
                 .build();
         rS = retrofit.create(roomService.class);
     }
-    public List<Room_simple> getAllRooms(){
-        return readAll();
+    public List<Room_simple> getAllRooms(final MutableLiveData<List<Room_simple>> rd){
+        return readAll(rd);
     }
     public List<Room_simple> delayedGet(){
         return RoomHold.getRoom();
@@ -57,14 +59,14 @@ public class ConnectionManager {
     /*private void create(Room room){
 =======
     */
-/*Room CRUD*//*
+    /*Room CRUD*//*
 
     private void create(Room room){
         Room service = retrofit.create(Room.class);
         Call<Room> r = service.createRoom(room);
     }*/
 
-    private List<Room_simple> readAll() {
+    private List<Room_simple> readAll(final MutableLiveData<List<Room_simple>> rd) {
 
         Call<List<Room_simple>> r = rS.getAllRooms();
 
@@ -76,8 +78,9 @@ public class ConnectionManager {
             @Override
             public void onResponse(Call<List<Room_simple>> call, Response<List<Room_simple>> response) {
                 if (response.isSuccessful()) {
+                    rd.setValue(response.body());
                     RoomHold.setRoom(response.body());
-                    //System.out.println(RoomHold.getRoom().get(0).getNavn());
+                    System.out.println(RoomHold.getRoom().get(0).getNavn());
                 }
             }
 
@@ -86,6 +89,7 @@ public class ConnectionManager {
                 System.out.println("Call failed, recieved: " + t);
             }
         });
+        System.out.println("got all rooms");
         return RoomHold.getRoom();
     }
     /*private Room read(Room room){
@@ -121,7 +125,7 @@ public class ConnectionManager {
 
     /*User CRUD*/
 
-/*User CRUD*//*
+    /*User CRUD*//*
     private void create(User user){
         User service = retrofit.create(User.class);
         Call<User> u = service.createUser(user);
