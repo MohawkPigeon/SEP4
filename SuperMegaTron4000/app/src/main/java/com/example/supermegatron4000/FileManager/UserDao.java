@@ -1,4 +1,3 @@
-/*
 package com.example.supermegatron4000.FileManager;
 
 import androidx.room.Dao;
@@ -23,4 +22,3 @@ public abstract class UserDao implements BaseDao<User> {
 
 }
 
-*/
