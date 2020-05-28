@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class SensorData {
 
     @NonNull
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     public int id;
 
@@ -31,8 +31,7 @@ public class SensorData {
     @ColumnInfo(name = "isOccupied")
     public boolean isOccupied;
 
-    public SensorData(int id, String dateTime, int humidity, int CO2, int audiolevel, int temperature, boolean isOccupied) {
-        this.id = id;
+    public SensorData(String dateTime, int humidity, int CO2, int audiolevel, int temperature, boolean isOccupied) {
         this.dateTime = dateTime;
         this.humidity = humidity;
         this.CO2 = CO2;
@@ -40,6 +39,8 @@ public class SensorData {
         this.temperature = temperature;
         this.isOccupied = isOccupied;
     }
+
+    public SensorData(){};
 
     public int getId() {
         return id;

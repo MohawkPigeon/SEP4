@@ -8,10 +8,10 @@ import androidx.room.PrimaryKey;
 import java.util.List;
 
 @Entity(tableName = "room")
-public class Room {
+public class myRoom {
 
     @NonNull
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     public int id;
 
@@ -31,8 +31,7 @@ public class Room {
     public String sData;
 
 
-    public Room(int id, String roomName, int minThreshold, int maxThreshold, String actions, String sData) {
-        this.id = id;
+    public myRoom(String roomName, int minThreshold, int maxThreshold, String actions, String sData) {
         this.roomName = roomName;
         this.minThreshold = minThreshold;
         this.maxThreshold = maxThreshold;
@@ -40,7 +39,7 @@ public class Room {
         this.sData = sData;
     }
 
-    public Room(){}
+    public myRoom(){}
 
     public int getId() {
         return id;

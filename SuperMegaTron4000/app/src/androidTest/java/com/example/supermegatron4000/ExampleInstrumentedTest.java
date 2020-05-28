@@ -10,17 +10,20 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.supermegatron4000.FileManager.ActionDao;
 import com.example.supermegatron4000.FileManager.AppDatabase;
-import com.example.supermegatron4000.FileManager.BaseDao;
+
+import com.example.supermegatron4000.FileManager.myRoom;
 import com.example.supermegatron4000.FileManager.RoomDao;
 import com.example.supermegatron4000.FileManager.SensorDataDao;
 import com.example.supermegatron4000.FileManager.User;
 import com.example.supermegatron4000.FileManager.UserDao;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
+import static java.sql.Types.NULL;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
@@ -59,15 +62,16 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void writeUserAndReadInList() throws Exception {
-        User user = new User(1, "bob", "123",null,null);
+        User user = new User( "bob", "123",null,null);
         user.setUsername("george");
         userDao.insert(user);
         User byName = userDao.findByName("george", "123");
         assertThat(byName.password, equalTo(user.password));
         assertEquals(byName.username, user.username);
 
-        User user1 = new com.example.supermegatron4000.FileManager.User(2, "bob1", "1234",null,null);
+        User user1 = new User("bob1", "1234",null,null);
         userDao.insert(user1);
+        user1 = userDao.findByName("bob1","1234");
 
         int intarray[] = new int[]{1, 2};
         assertEquals(userDao.loadAllByIds(intarray).get(1).id, 2);
@@ -77,8 +81,48 @@ public class ExampleInstrumentedTest {
         assertEquals(userDao.loadAllByIds(intarray).get(1).username, "kent");
 
         userDao.delete(user1);
-        userDao.delete(user);
+        userDao.delete(byName);
         assertEquals(0, userDao.getAll().size());
+    }
+
+    @Test
+    public void Test2() throws Exception {
+        myRoom room = new myRoom("room1",1,10,"Go","Data");
+
+        roomDao.insert(room);
+        myRoom room1 = roomDao.loadById(1);
+        assertEquals(room1.getId(),1);
+
+        myRoom room2 = new myRoom();
+        roomDao.insert(room2);
+        room2 = roomDao.loadById(2);
+        assertEquals(room2.id,2);
+
+        room2 = room1;
+        roomDao.update(room2);
+        assertEquals(room2.id, 1);
+
+        roomDao.delete(room2);
+        room2 = roomDao.loadById(1);
+
+        assertEquals(room2, null);
+
+    }
+
+    @Test
+    public void TestGetAllRoomByUser() throws Exception {
+        myRoom room = new myRoom("room1",1,10,"Go","Data");
+        roomDao.insert(room);
+        room = roomDao.loadById(1);
+
+        User user = new User( "bob", "123","room1",null);
+        userDao.insert(user);
+        user = userDao.findByName("bob","123");
+
+        List<myRoom> list =roomDao.getAllRoomByUser();
+
+        assertEquals("room1",list.get(0).roomName);
+
     }
 }
 

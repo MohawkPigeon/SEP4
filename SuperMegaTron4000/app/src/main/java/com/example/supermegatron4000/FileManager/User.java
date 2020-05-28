@@ -12,7 +12,7 @@ import java.util.List;
 public class User {
 
     @NonNull
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     public int id;
 
@@ -31,13 +31,14 @@ public class User {
     public String role;
 
 
-    public User(int id, @NonNull String username, @NonNull String password, String rooms, String role) {
-        this.id = id;
+    public User(@NonNull String username, @NonNull String password, String rooms, String role) {
         this.username = username;
         this.password = password;
         this.rooms = rooms;
         this.role = role;
     }
+
+    public User(){};
 
     public int getId() {
         return id;

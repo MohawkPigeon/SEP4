@@ -9,17 +9,18 @@ import androidx.room.PrimaryKey;
 public class Action {
 
     @NonNull
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     public int id;
 
     @ColumnInfo(name = "command")
     public String command;
 
-    public Action(int id, @NonNull String command) {
-        this.id = id;
+    public Action(@NonNull String command) {
         this.command = command;
     }
+
+    public Action(){};
 
     public int getId() {
         return id;
