@@ -16,11 +16,9 @@ public class User {
     @ColumnInfo(name = "id")
     public int id;
 
-    @NonNull
     @ColumnInfo(name = "username")
     public String username;
 
-    @NonNull
     @ColumnInfo(name = "password")
     public String password;
 
@@ -31,7 +29,7 @@ public class User {
     public String role;
 
 
-    public User(@NonNull String username, @NonNull String password, String rooms, String role) {
+    public User(String username, String password, String rooms, String role) {
         this.username = username;
         this.password = password;
         this.rooms = rooms;

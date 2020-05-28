@@ -20,5 +20,8 @@ public abstract class UserDao implements BaseDao<User> {
             "password LIKE :last LIMIT 1")
     public abstract User findByName(String first, String last);
 
+    @Query("SELECT * FROM user WHERE id LIKE :first")
+    public abstract User findById(int first);
+
 }
 
