@@ -8,27 +8,28 @@ import com.example.supermegatron4000.FileManager.UserDao;
 import com.example.supermegatron4000.model.User;
 
 public class ReferenceManager { // måske bare lad være med at bruge denne klasse.
-/*
+
     String username;
     String password;
 
     UserDao dataManager;
     ConnectionManager connectionManager;
-    MutableLiveData<User> user;
+    final MutableLiveData<User> user = new MutableLiveData<User>();
 
-    User getUser(){
+    MutableLiveData<User> getUser(){
         if (user.getValue() != null){
             return user.getValue();
         } else {
             if(connectionManager.hasConnection()){
                 connectionManager.loginUser(username,password,user);
             }else{
-                //user.setValue(dataManager.getAll().get(0)); // Bruger foskellige brugere.
+                user.setValue(dataManager.getAll().get(0)); // Bruger foskellige brugere.
             }
         }
+        return user;
     }
     User getSavedUser(){
-
+        user.setValue(dataManager.getAll().get(0));
     }
     private void Update(property changedProperty){
 
