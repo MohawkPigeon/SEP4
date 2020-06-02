@@ -2,6 +2,7 @@
 package com.example.supermegatron4000;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
@@ -13,6 +14,9 @@ import com.example.supermegatron4000.FileManager.AppDatabase;
 
 import com.example.supermegatron4000.FileManager.DBHelper;
 import com.example.supermegatron4000.FileManager.SensorData;
+import com.example.supermegatron4000.FileManager.SensorDataFactory;
+import com.example.supermegatron4000.FileManager.UserFactory;
+import com.example.supermegatron4000.FileManager.main;
 import com.example.supermegatron4000.FileManager.myRoom;
 import com.example.supermegatron4000.FileManager.RoomDao;
 import com.example.supermegatron4000.FileManager.SensorDataDao;
@@ -20,10 +24,13 @@ import com.example.supermegatron4000.FileManager.User;
 import com.example.supermegatron4000.FileManager.UserDao;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+
+import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
@@ -36,6 +43,7 @@ import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
     @Test
     public void useAppContext() {
         // Context of the app under test.
@@ -59,10 +67,11 @@ public class ExampleInstrumentedTest {
 
  */
 
+
     @Before
     public void createDb() throws InterruptedException {
 
-        Context context = ApplicationProvider.getApplicationContext();
+        Context context = getApplicationContext();
         //db = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
         db = AppDatabase.getInstance(context);
         userDao = db.UserDao();
@@ -86,7 +95,7 @@ public class ExampleInstrumentedTest {
         User user = new User("bob", "123",null,null);
         userDao.insert(user);
         user = userDao.findById(1);
-        //userDao.update(user);
+
         assertEquals(1, userDao.getAll().get(0).id);
         assertEquals("bob", userDao.getAll().get(0).username);
 
@@ -95,18 +104,17 @@ public class ExampleInstrumentedTest {
         User user1 = new User("bob1", "1234",null,null);
         userDao.insert(user1);
 
-        user1 = userDao.findById(3);
+        user1 = userDao.findById(2);
         assertEquals("bob1", user1.username);
 
         user1.setUsername("kent");
         userDao.update(user1);
-        assertEquals("kent", userDao.getAll().get(2).username);
+        assertEquals("kent", userDao.getAll().get(1).username);
 
         userDao.delete(user1);
         userDao.delete(user);
 
-        //Ved ikke hvorfor jeg får en extra her
-        assertEquals(1, userDao.getAll().size());
+        assertEquals(0, userDao.getAll().size());
     }
 
     @Test
@@ -148,5 +156,38 @@ public class ExampleInstrumentedTest {
         assertEquals("room1",list.get(0).roomName);
 
     }
+
+
+    @Test
+    public void TestGetAll() throws Exception {
+        User user = new User("bob", "123", "room1", null);
+        userDao.insert(user);
+        user = userDao.getAll().get(0);
+
+        //assertEquals("bob", user.username);
+
+
+        Thread thread = new Thread((Runnable) () -> {
+            List<User> users = AppDatabase.getInstance(getApplicationContext()).UserDao().getAll();
+
+            assertEquals("bob", users.get(0).username);
+
+        });
+        thread.start();
+
+    }
+
+    @Test
+    public void TestUserFactory() throws Exception{
+        UserFactory userFactory = new UserFactory();
+
+        User user = new User("bob","123",null,null);
+        userFactory.insertUser(user);
+
+        assertEquals("bob",  userFactory.getAllUsers().get(0).username);
+    }
+
+
+
 }
 

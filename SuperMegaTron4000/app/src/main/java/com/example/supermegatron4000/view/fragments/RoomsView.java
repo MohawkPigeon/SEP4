@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,12 +31,15 @@ public class RoomsView extends Fragment {
     private RoomsViewModel mRooms;
     private RoomsListAdapter adapter;
     private RecyclerView recyclerView;
+    private ProgressBar pBar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.rooms_view_layout, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
+
+        pBar = view.findViewById(R.id.pBarRooms);
 
         mRooms = new ViewModelProvider(this).get(RoomsViewModel.class);
         mRooms.init();
@@ -44,7 +48,9 @@ public class RoomsView extends Fragment {
             @Override
             public void onChanged(List<Room_simple> room_simples) {
                 adapter.notifyDataSetChanged();
+                pBar.setVisibility(View.VISIBLE);
                 update();
+                pBar.setVisibility(View.INVISIBLE);
 
             }
         });
@@ -76,10 +82,6 @@ public class RoomsView extends Fragment {
     public void update (){
         adapter = new RoomsListAdapter(getContext(), mRooms.getRooms().getValue());
         recyclerView.setAdapter(adapter);
-
-        RecyclerView.ItemDecoration divider = new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(divider);
-
     }
 
 }
