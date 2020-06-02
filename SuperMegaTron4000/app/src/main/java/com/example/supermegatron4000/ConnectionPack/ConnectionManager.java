@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
-import com.example.supermegatron4000.model.Action;
+import com.example.supermegatron4000.FileManager.Action;
 
-import com.example.supermegatron4000.model.Room_simple;
-import com.example.supermegatron4000.model.SensorData;
-import com.example.supermegatron4000.model.User;
+import com.example.supermegatron4000.FileManager.myRoom;
+import com.example.supermegatron4000.FileManager.SensorData;
+import com.example.supermegatron4000.FileManager.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,7 +48,7 @@ public class ConnectionManager {
         rS = retrofit.create(roomService.class);
     }
 
-    public void getAllRooms(final MutableLiveData<List<Room_simple>> rd){
+    public void getAllRooms(final MutableLiveData<List<myRoom>> rd){
         readAllRooms(rd);
     }
 
@@ -63,7 +63,7 @@ public class ConnectionManager {
     public void getUser(String userID, final MutableLiveData<User> user){
         readUser(userID,user);
     }
-    public void getRoom(int roomID, final MutableLiveData<Room_simple> room){
+    public void getRoom(int roomID, final MutableLiveData<myRoom> room){
         readRoom(roomID,room);
     }
     public void getAction(int actionID, final MutableLiveData<Action> action){
@@ -75,7 +75,7 @@ public class ConnectionManager {
     public void get(User t, String userID, final MutableLiveData<User> user){ // t variabler bruges til at bestemme metode.
         readUser(userID,user);
     }
-    public void get(Room_simple t, int roomID, final MutableLiveData<Room_simple> room){
+    public void get(myRoom t, int roomID, final MutableLiveData<myRoom> room){
         readRoom(roomID,room);
     }
     public void get(Action t, int actionID, final MutableLiveData<Action> action){
@@ -87,7 +87,7 @@ public class ConnectionManager {
     public void update(User user){
         updateUser(user);
     }
-    public void update(Room_simple room){
+    public void update(myRoom room){
         updateRoom(room);
     }
     public void update(Action action){
@@ -100,7 +100,7 @@ public class ConnectionManager {
     public void updateuser(User user){
         updateUser(user);
     }
-    public void updateroom(Room_simple room){
+    public void updateroom(myRoom room){
         updateRoom(room);
     }
     public void updateaction(Action action){
@@ -113,7 +113,7 @@ public class ConnectionManager {
     public void create(User user){
         createUser(user);
     }
-    public void create(Room_simple room){
+    public void create(myRoom room){
         createRoom(room);
     }
     public void create(Action action){
@@ -126,7 +126,7 @@ public class ConnectionManager {
     public void delete(User user){
         deleteUser(user);
     }
-    public void delete(Room_simple room){
+    public void delete(myRoom room){
         deleteRoom(room);
     }
     public void delete(Action action){
@@ -150,30 +150,30 @@ public class ConnectionManager {
     /*Room CRUD*/
 
 
-    private void createRoom(Room_simple room) {
+    private void createRoom(myRoom room) {
 
-        Call<Room_simple> req = rS.createRoom(room); // opretter et kald udfra indbyggede interfaces.
-                                                        //Room_simple bliver passeret som parameter.
-        req.enqueue(new Callback<Room_simple>() {
+        Call<myRoom> req = rS.createRoom(room); // opretter et kald udfra indbyggede interfaces.
+                                                        //myRoom bliver passeret som parameter.
+        req.enqueue(new Callback<myRoom>() {
             @Override
-            public void onResponse(Call<Room_simple> call, Response<Room_simple> response) {
+            public void onResponse(Call<myRoom> call, Response<myRoom> response) {
 
             }
 
             @Override
-            public void onFailure(Call<Room_simple> call, Throwable t) {
+            public void onFailure(Call<myRoom> call, Throwable t) {
                 System.out.println("Call failed, recieved: " + t); // SOUT hvis kaldet fejler printes fejlen til konsollet. Bruges til debugging.
             }
         });
     }
 
-    private void readAllRooms(final MutableLiveData<List<Room_simple>> rd) {
+    private void readAllRooms(final MutableLiveData<List<myRoom>> rd) {
 
-        Call<List<Room_simple>> req = rS.getAllRooms();
+        Call<List<myRoom>> req = rS.getAllRooms();
 
-        req.enqueue(new Callback<List<Room_simple>>() {
+        req.enqueue(new Callback<List<myRoom>>() {
             @Override
-            public void onResponse(Call<List<Room_simple>> call, Response<List<Room_simple>> response) {
+            public void onResponse(Call<List<myRoom>> call, Response<List<myRoom>> response) {
                 if (response.isSuccessful()) {
 
                     rd.setValue(response.body()); //resultatet på kaldet bliver indsat i MutableLiveData variablet, som så læses andre steder.
@@ -186,18 +186,18 @@ public class ConnectionManager {
             }
 
             @Override
-            public void onFailure(Call<List<Room_simple>> call, Throwable t) {
+            public void onFailure(Call<List<myRoom>> call, Throwable t) {
                 System.out.println("Call failed, recieved: " + t);
             }
         });
     }
-    private void readRoom(int roomID, final MutableLiveData<Room_simple> room){
+    private void readRoom(int roomID, final MutableLiveData<myRoom> room){
 
-        Call<Room_simple> req = rS.getRoom(roomID);
+        Call<myRoom> req = rS.getRoom(roomID);
 
-        req.enqueue(new Callback<Room_simple>() {
+        req.enqueue(new Callback<myRoom>() {
             @Override
-            public void onResponse(Call<Room_simple> call, Response<Room_simple> response) {
+            public void onResponse(Call<myRoom> call, Response<myRoom> response) {
                 if(response.isSuccessful()){
                     room.setValue(response.body());
                 } else {
@@ -206,38 +206,38 @@ public class ConnectionManager {
             }
 
             @Override
-            public void onFailure(Call<Room_simple> call, Throwable t) {
+            public void onFailure(Call<myRoom> call, Throwable t) {
                 System.out.println("Call faliled recieved: " + t);
             }
         });
     }
-    private void updateRoom(Room_simple room){
-        Call<Room_simple> req = rS.updateRoom(room.getRoomID(), room);
+    private void updateRoom(myRoom room){
+        Call<myRoom> req = rS.updateRoom(room.getId(), room);
 
-        req.enqueue(new Callback<Room_simple>() {
+        req.enqueue(new Callback<myRoom>() {
             @Override
-            public void onResponse(Call<Room_simple> call, Response<Room_simple> response) {
+            public void onResponse(Call<myRoom> call, Response<myRoom> response) {
 
             }
 
             @Override
-            public void onFailure(Call<Room_simple> call, Throwable t) {
+            public void onFailure(Call<myRoom> call, Throwable t) {
                 System.out.println("Call faliled recieved: " + t);
             }
         });
 
     }
-    private void deleteRoom(Room_simple room){
-        Call<Room_simple> req = rS.deleteRoom(room.getRoomID());
+    private void deleteRoom(myRoom room){
+        Call<myRoom> req = rS.deleteRoom(room.getId());
 
-        req.enqueue(new Callback<Room_simple>() {
+        req.enqueue(new Callback<myRoom>() {
             @Override
-            public void onResponse(Call<Room_simple> call, Response<Room_simple> response) {
+            public void onResponse(Call<myRoom> call, Response<myRoom> response) {
 
             }
 
             @Override
-            public void onFailure(Call<Room_simple> call, Throwable t) {
+            public void onFailure(Call<myRoom> call, Throwable t) {
                 System.out.println("Call faliled recieved: " + t);
             }
         });
@@ -362,7 +362,7 @@ public class ConnectionManager {
     }
     private void updateAction(Action action){
 
-        Call<Action> req = aS.updateAction(action.ActionID, action);
+        Call<Action> req = aS.updateAction(action.getId(), action);
         req.enqueue(new Callback<Action>() {
             @Override
             public void onResponse(Call<Action> call, Response<Action> response) {
@@ -376,7 +376,7 @@ public class ConnectionManager {
         });
     }
     private void deleteAction(Action action){
-        Call<Action> req = aS.deleteAction(action.ActionID);
+        Call<Action> req = aS.deleteAction(action.getId());
         req.enqueue(new Callback<Action>() {
             @Override
             public void onResponse(Call<Action> call, Response<Action> response) {
@@ -422,7 +422,7 @@ public class ConnectionManager {
     }
     private void updateData(SensorData data){ // Denne metode bør ikke bruges.
 
-        Call<SensorData> req = dS.updateSensorData(data.getDateTime().getNanos(), data);
+        Call<SensorData> req = dS.updateSensorData(data.getId(), data);
         req.enqueue(new Callback<SensorData>() {
             @Override
             public void onResponse(Call<SensorData> call, Response<SensorData> response) {
@@ -436,25 +436,25 @@ public class ConnectionManager {
         });
     }
     private void deleteData(SensorData data){
-        Call<SensorData> req = dS.deleteSensorData(data.getDateTime().getNanos());
+        Call<SensorData> req = dS.deleteSensorData(data.getId());
     }
 }
 
 interface roomService{
     @POST("rooms/new")
-    Call<Room_simple> createRoom(@Body Room_simple room);
+    Call<myRoom> createRoom(@Body myRoom room);
 
     @GET("room")
-    Call<List<Room_simple>> getAllRooms ();
+    Call<List<myRoom>> getAllRooms ();
 
     @GET("rooms/{room}")
-    Call<Room_simple> getRoom (@Path("room") int room);
+    Call<myRoom> getRoom (@Path("room") int room);
 
     @PUT("update/{id}")
-    Call<Room_simple> updateRoom(@Path("id") int id, @Body Room_simple room);
+    Call<myRoom> updateRoom(@Path("id") int id, @Body myRoom room);
 
     @DELETE("delete/{id}")
-    Call<Room_simple> deleteRoom(@Path("id") int id);
+    Call<myRoom> deleteRoom(@Path("id") int id);
 }
 interface userService {
     @POST("users/new")

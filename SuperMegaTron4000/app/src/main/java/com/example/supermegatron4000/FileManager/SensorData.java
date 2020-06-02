@@ -5,8 +5,13 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 @Entity(tableName = "sensorData")
-public class SensorData {
+public class SensorData implements Serializable {
 
     @NonNull
     @PrimaryKey(autoGenerate = true)
@@ -14,15 +19,20 @@ public class SensorData {
     public int id;
 
     @ColumnInfo(name = "dateTime")
-    public String dateTime;
+    @SerializedName("sensorDatatimestamp")
+    @Expose public String dateTime;
 
     @ColumnInfo(name = "humidity")
-    public int humidity;
+    @SerializedName("humidity")
+    @Expose public int humidity;
 
     @ColumnInfo(name = "CO2")
-    public int CO2;
+    @SerializedName("cO2")
+    @Expose public int CO2;
 
     @ColumnInfo(name = "audiolevel")
+    @SerializedName("audioLevel")
+    @Expose
     public int audiolevel;
 
     @ColumnInfo(name = "temperature")

@@ -5,18 +5,24 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Entity(tableName = "room")
-public class myRoom {
+public class myRoom implements Serializable {
 
+    @SerializedName("roomID")
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    public int id;
+    @Expose public int id;
 
+    @SerializedName("name")
     @ColumnInfo(name = "roomName")
-    public String roomName;
+    @Expose public String roomName;
 
     @ColumnInfo(name = "minThreshold")
     public int minThreshold;
@@ -27,8 +33,9 @@ public class myRoom {
     @ColumnInfo(name = "actions")
     public String actions;
 
+    @SerializedName("sensorData")
     @ColumnInfo(name = "sData")
-    public String sData;
+    @Expose public String sData;
 
 
     public myRoom(String roomName, int minThreshold, int maxThreshold, String actions, String sData) {

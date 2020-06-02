@@ -3,14 +3,18 @@ package com.example.supermegatron4000;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.supermegatron4000.ConnectionPack.ConnectionManager;
-import com.example.supermegatron4000.DataManager;
+import com.example.supermegatron4000.FileManager.Action;
+import com.example.supermegatron4000.FileManager.SensorData;
 import com.example.supermegatron4000.FileManager.UserDao;
-import com.example.supermegatron4000.model.User;
+import com.example.supermegatron4000.FileManager.User;
+import com.example.supermegatron4000.FileManager.myRoom;
+
+import java.util.List;
 
 public class ReferenceManager { // måske bare lad være med at bruge denne klasse.
 
-    String username;
-    String password;
+    String username = "sep4@gmail.com"; // hardcoded da authentifikation blev irrellevant
+    String password = "password";
 
     UserDao dataManager;
     ConnectionManager connectionManager;
@@ -18,31 +22,59 @@ public class ReferenceManager { // måske bare lad være med at bruge denne klas
 
     MutableLiveData<User> getUser(){
         if (user.getValue() != null){
-            return user.getValue();
+            //return user.getValue();
         } else {
             if(connectionManager.hasConnection()){
                 connectionManager.loginUser(username,password,user);
             }else{
-                user.setValue(dataManager.getAll().get(0)); // Bruger foskellige brugere.
+                user.setValue(dataManager.getAll().get(0));
             }
         }
         return user;
     }
-    User getSavedUser(){
+    MutableLiveData<User> getSavedUser(){
         user.setValue(dataManager.getAll().get(0));
+        return user;
     }
-    private void Update(property changedProperty){
 
+    private void getAllRooms(final MutableLiveData<List<myRoom>> rooms){
+        connectionManager.getAllRooms(rooms);
     }
-    void append(property parent, property property){
 
+    private void Create(User user){
+        connectionManager.create(user);
     }
-    private searchUser(){
-        if(ConnectionManager.hasConnection()){
-            ConnectionManager.
-        }else {
-
-        }
+    private void Create(myRoom room){
+        connectionManager.create(room);
     }
- */
+    private void Create(Action action){
+        connectionManager.create(action);
+    }
+    private void Create(SensorData data){
+        connectionManager.create(data);
+    }
+    private void Update(User user){
+        connectionManager.update(user);
+    }
+    private void Update(myRoom room){
+        connectionManager.update(room);
+    }
+    private void Update(Action action){
+        connectionManager.update(action);
+    }
+    private void Update(SensorData data){
+        connectionManager.update(data);
+    }
+    private void Delete(User user){
+        connectionManager.delete(user);
+    }
+    private void Delete(myRoom room){
+        connectionManager.delete(room);
+    }
+    private void Delete(Action action){
+        connectionManager.delete(action);
+    }
+    private void Delete(SensorData data){
+        connectionManager.delete(data);
+    }
 }
