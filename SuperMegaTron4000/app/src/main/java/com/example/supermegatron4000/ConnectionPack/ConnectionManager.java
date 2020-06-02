@@ -1,15 +1,11 @@
 package com.example.supermegatron4000.ConnectionPack;
 
-<<<<<<< HEAD
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
 import com.example.supermegatron4000.model.Action;
-=======
-import androidx.lifecycle.MutableLiveData;
 
->>>>>>> 0e35229f4c0978d13f7b2eac5675d0c957709055
 import com.example.supermegatron4000.model.Room_simple;
 import com.example.supermegatron4000.model.SensorData;
 import com.example.supermegatron4000.model.User;
@@ -44,21 +40,16 @@ public class ConnectionManager {
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-<<<<<<< HEAD
+
         rS = retrofit.create(roomService.class); //opretter services baseret på indbyggede interfaces.
         uS = retrofit.create(userService.class);
         dS = retrofit.create(dataService.class);
         aS = retrofit.create(actionService.class);
-=======
         rS = retrofit.create(roomService.class);
     }
-    public List<Room_simple> getAllRooms(final MutableLiveData<List<Room_simple>> rd){
-        return readAll(rd);
->>>>>>> 0e35229f4c0978d13f7b2eac5675d0c957709055
-    }
+
     public void getAllRooms(final MutableLiveData<List<Room_simple>> rd){
         readAllRooms(rd);
-
     }
 
     public boolean hasConnection(){
@@ -151,24 +142,19 @@ public class ConnectionManager {
 
     /*Room CRUD*/
     /*private void create(Room room){
-=======
+
     */
-<<<<<<< HEAD
+
 /*Room CRUD*/
-=======
-    /*Room CRUD*//*
->>>>>>> 0e35229f4c0978d13f7b2eac5675d0c957709055
 
-    private void createRoom(Room_simple room){
+    /*Room CRUD*/
 
-<<<<<<< HEAD
+
+    private void createRoom(Room_simple room) {
+
         Call<Room_simple> req = rS.createRoom(room); // opretter et kald udfra indbyggede interfaces.
-                                                                //Room_simple bliver passeret som parameter.
-=======
-    private List<Room_simple> readAll(final MutableLiveData<List<Room_simple>> rd) {
->>>>>>> 0e35229f4c0978d13f7b2eac5675d0c957709055
-
-        req.enqueue(new Callback<Room_simple>() { //Opretter et anonymt Callback for at gøre kaldet asynkront.
+                                                        //Room_simple bliver passeret som parameter.
+        req.enqueue(new Callback<Room_simple>() {
             @Override
             public void onResponse(Call<Room_simple> call, Response<Room_simple> response) {
 
@@ -179,7 +165,6 @@ public class ConnectionManager {
                 System.out.println("Call failed, recieved: " + t); // SOUT hvis kaldet fejler printes fejlen til konsollet. Bruges til debugging.
             }
         });
-
     }
 
     private void readAllRooms(final MutableLiveData<List<Room_simple>> rd) {
@@ -190,15 +175,13 @@ public class ConnectionManager {
             @Override
             public void onResponse(Call<List<Room_simple>> call, Response<List<Room_simple>> response) {
                 if (response.isSuccessful()) {
-<<<<<<< HEAD
+
                     rd.setValue(response.body()); //resultatet på kaldet bliver indsat i MutableLiveData variablet, som så læses andre steder.
                 } else {
                     System.out.println("Response was not succesfull.\n");
-=======
+
                     rd.setValue(response.body());
-                    RoomHold.setRoom(response.body());
-                    System.out.println(RoomHold.getRoom().get(0).getNavn());
->>>>>>> 0e35229f4c0978d13f7b2eac5675d0c957709055
+
                 }
             }
 
@@ -207,11 +190,6 @@ public class ConnectionManager {
                 System.out.println("Call failed, recieved: " + t);
             }
         });
-<<<<<<< HEAD
-=======
-        System.out.println("got all rooms");
-        return RoomHold.getRoom();
->>>>>>> 0e35229f4c0978d13f7b2eac5675d0c957709055
     }
     private void readRoom(int roomID, final MutableLiveData<Room_simple> room){
 
@@ -264,9 +242,7 @@ public class ConnectionManager {
             }
         });
     }
-
-
-<<<<<<< HEAD
+    
 /*User CRUD*/
     private void createUser(User user){
         Call<User> req = uS.createUser(user);
@@ -337,12 +313,6 @@ public class ConnectionManager {
                 System.out.println("Call faliled recieved: " + t);
             }
         });
-=======
-    /*User CRUD*//*
-    private void create(User user){
-        User service = retrofit.create(User.class);
-        Call<User> u = service.createUser(user);
->>>>>>> 0e35229f4c0978d13f7b2eac5675d0c957709055
     }
 
     public void loginUser(String username, String password, final MutableLiveData<User> user){
