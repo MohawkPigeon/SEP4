@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.supermegatron4000.ConnectionPack.ConnectionManager;
 import com.example.supermegatron4000.model.Room_simple;
 import com.example.supermegatron4000.repositories.RoomsRepository;
 

@@ -1,26 +1,39 @@
-/*package com.example.logappdev2;
+package com.example.supermegatron4000;
 
-public class ReferenceManager {
+import androidx.lifecycle.MutableLiveData;
 
-    DataManager dataManager;
+import com.example.supermegatron4000.ConnectionPack.ConnectionManager;
+import com.example.supermegatron4000.DataManager;
+import com.example.supermegatron4000.FileManager.UserDao;
+import com.example.supermegatron4000.model.User;
+
+public class ReferenceManager { // måske bare lad være med at bruge denne klasse.
+/*
+    String username;
+    String password;
+
+    UserDao dataManager;
     ConnectionManager connectionManager;
-    User user;
+    MutableLiveData<User> user;
 
     User getUser(){
-        if (User != null){
-            return User;
+        if (user.getValue() != null){
+            return user.getValue();
         } else {
             if(connectionManager.hasConnection()){
-                connectionManager.getUser();
+                connectionManager.loginUser(username,password,user);
             }else{
-                dataManager.getUser();
+                //user.setValue(dataManager.getAll().get(0)); // Bruger foskellige brugere.
             }
         }
+    }
+    User getSavedUser(){
+
     }
     private void Update(property changedProperty){
 
     }
-    void append(property property, property path){
+    void append(property parent, property property){
 
     }
     private searchUser(){
@@ -30,4 +43,5 @@ public class ReferenceManager {
 
         }
     }
-}*/
+ */
+}
