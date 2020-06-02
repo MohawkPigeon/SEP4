@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logappdev2.R;
+import com.example.supermegatron4000.model.Room_simple;
 import com.example.supermegatron4000.view.activities.RoomActivity;
 
 import java.util.List;
@@ -19,14 +20,20 @@ import java.util.List;
 public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyViewHolder> {
 
     private LayoutInflater mInflater;
-    private List<String> mWordList;
+    private List<Room_simple> mRoomList;
     Context mContext;
 
-
-    public RoomsListAdapter(Context context,List<String> wordList) {
-        this.mContext = context;
-        this.mWordList = wordList;
+    ItemClicked activity;
+    public interface ItemClicked{
+        void onItemClicked(int index);
     }
+
+
+    public RoomsListAdapter(Context context,List<Room_simple> roomList) {
+        this.mContext = context;
+        this.mRoomList = roomList;
+    }
+
     @NonNull
     @Override
     public RoomsListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,12 +43,17 @@ public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull RoomsListAdapter.MyViewHolder holder, int position) {
-        String mCurrent = mWordList.get(position);
-        holder.btn.setText(mCurrent);
+        holder.itemView.setTag(mRoomList.get(position));
+        Room_simple mCurrent = mRoomList.get(position);
+        holder.btn.setText(mCurrent.getNavn());
     }
+
     @Override
     public int getItemCount() {
-        return mWordList.size();
+        if (mRoomList==null){
+            return 0;
+        }
+        return mRoomList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -59,13 +71,12 @@ public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyVi
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Intent intent = new Intent(v.getContext(), RoomActivity.class);
                     v.getContext().startActivity(intent);
                 }
             });
-
         }
-
         @Override
         public void onClick(View view) {
 
