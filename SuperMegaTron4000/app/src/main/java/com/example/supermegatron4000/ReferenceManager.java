@@ -3,6 +3,10 @@ package com.example.supermegatron4000;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.supermegatron4000.ConnectionPack.ConnectionManager;
+import com.example.supermegatron4000.FileManager.ActionFactory;
+import com.example.supermegatron4000.FileManager.RoomFactory;
+import com.example.supermegatron4000.FileManager.SensorDataFactory;
+import com.example.supermegatron4000.FileManager.UserFactory;
 import com.example.supermegatron4000.model.SensorData;
 import com.example.supermegatron4000.FileManager.UserDao;
 import com.example.supermegatron4000.model.User;
@@ -15,29 +19,66 @@ public class ReferenceManager { // måske bare lad være med at bruge denne klas
     String username = "sep4@gmail.com"; // hardcoded da authentifikation blev irrellevant
     String password = "password";
 
-    UserDao dataManager;
+    UserFactory dataManager;
+    RoomFactory roomFactory;
+    ActionFactory actionFactory;
+    SensorDataFactory sensorDataFactory;
+
     ConnectionManager connectionManager;
     final MutableLiveData<User> user = new MutableLiveData<User>();
 
     MutableLiveData<User> getUser(){
         if (user.getValue() != null){
-            //return user.getValue();
+            return user;
         } else {
             if(connectionManager.hasConnection()){
                 connectionManager.loginUser(username,password,user);
+
+                if (dataManager.getAllUsers().isEmpty())
+                dataManager.insertUser(user.getValue());
+
             }else{
-                user.setValue(dataManager.getAll().get(0));
+                user.setValue(getSavedUser().getValue()) ;
             }
         }
         return user;
     }
+
     MutableLiveData<User> getSavedUser(){
-        user.setValue(dataManager.getAll().get(0));
+        user.setValue(dataManager.getAllUsers().get(0));
         return user;
     }
 
     private void getAllRooms(final MutableLiveData<List<myRoom>> rooms){
+        if(connectionManager.hasConnection())
         connectionManager.getAllRooms(rooms);
+        else if(!getSavedRooms().isEmpty())
+            rooms.setValue(getSavedRooms());
+
+        if (getSavedRooms().isEmpty() && rooms.getValue() != null){
+            for(int i=0; i < rooms.getValue().size(); i++)
+                roomFactory.insertRoom(rooms.getValue().get(i));
+        }
+    }
+
+    List<myRoom> getSavedRooms(){
+        return roomFactory.getAllRooms();
+    }
+
+    List<Action> getSavedActions(){
+        return actionFactory.getAllActions();
+    }
+
+    void saveAction(Action action){
+        actionFactory.insertAction(action);
+    }
+
+    List<SensorData> getSavedSensorData(){
+        return sensorDataFactory.getAllSensorData();
+    }
+
+    void saveSensorData(SensorData sensorData){
+        sensorDataFactory.insertSensorData(sensorData);
     }
 
     private void Create(User user){
