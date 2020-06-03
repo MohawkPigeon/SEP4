@@ -1,4 +1,8 @@
 package com.example.supermegatron4000.FileManager;
+import com.example.supermegatron4000.model.Action;
+import com.example.supermegatron4000.model.SensorData;
+import com.example.supermegatron4000.model.User;
+import com.example.supermegatron4000.model.myRoom;
 
 import android.content.Context;
 

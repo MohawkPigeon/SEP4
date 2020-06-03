@@ -1,29 +1,43 @@
 package com.example.supermegatron4000.model;
 
-public class Action {
-    public int ActionID;
-    public int command;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-    public Action(int actionID, int command) {
-        ActionID = actionID;
+import java.io.Serializable;
+
+@Entity(tableName = "action")
+public class Action implements Serializable {
+
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    public int id;
+
+    @ColumnInfo(name = "command")
+    public String command;
+
+    public Action(@NonNull String command) {
         this.command = command;
     }
 
-    public int getActionID() {
-        return ActionID;
+    public Action(){};
+
+    public int getId() {
+        return id;
     }
 
-    public void setActionID(int actionID) {
-        ActionID = actionID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getCommand() {
+    @NonNull
+    public String getCommand() {
         return command;
     }
 
-    public void setCommand(int command) {
+    public void setCommand(@NonNull String command) {
         this.command = command;
     }
-
-
 }

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logappdev2.R;
-import com.example.supermegatron4000.model.Room_simple;
+import com.example.supermegatron4000.model.myRoom;
 import com.example.supermegatron4000.view.activities.RoomActivity;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
 public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyViewHolder> {
 
     private LayoutInflater mInflater;
-    private List<Room_simple> mRoomList;
+    private List<myRoom> mRoomList;
     Context mContext;
 
     ItemClicked activity;
@@ -29,7 +29,7 @@ public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyVi
     }
 
 
-    public RoomsListAdapter(Context context,List<Room_simple> roomList) {
+    public RoomsListAdapter(Context context, List<myRoom> roomList) {
         this.mContext = context;
         this.mRoomList = roomList;
     }
@@ -44,8 +44,8 @@ public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull RoomsListAdapter.MyViewHolder holder, int position) {
         holder.itemView.setTag(mRoomList.get(position));
-        Room_simple mCurrent = mRoomList.get(position);
-        holder.btn.setText(mCurrent.getNavn());
+        myRoom mCurrent = mRoomList.get(position);
+        holder.btn.setText(mCurrent.getRoomName());
     }
 
     @Override

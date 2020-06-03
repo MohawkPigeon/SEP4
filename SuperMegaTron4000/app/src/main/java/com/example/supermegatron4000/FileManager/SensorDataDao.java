@@ -1,12 +1,10 @@
 package com.example.supermegatron4000.FileManager;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
-import java.sql.Timestamp;
+import com.example.supermegatron4000.model.SensorData;
+
 import java.util.List;
 
 @Dao

@@ -1,16 +1,11 @@
 package com.example.supermegatron4000.ConnectionPack;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.room.Room;
 
-import com.example.supermegatron4000.FileManager.Action;
-
-import com.example.supermegatron4000.FileManager.myRoom;
-import com.example.supermegatron4000.FileManager.SensorData;
-import com.example.supermegatron4000.FileManager.User;
-
-import java.io.IOException;
+import com.example.supermegatron4000.model.myRoom;
+import com.example.supermegatron4000.model.SensorData;
+import com.example.supermegatron4000.model.User;
+import com.example.supermegatron4000.model.Action;
 import java.util.List;
 
 import retrofit2.Call;

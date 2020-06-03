@@ -2,36 +2,27 @@
 package com.example.supermegatron4000;
 
 import android.content.Context;
-import android.util.Log;
 
-import androidx.room.Room;
-import androidx.test.core.app.ApplicationProvider;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.supermegatron4000.FileManager.ActionDao;
 import com.example.supermegatron4000.FileManager.AppDatabase;
 
-import com.example.supermegatron4000.FileManager.DBHelper;
-import com.example.supermegatron4000.FileManager.SensorData;
-import com.example.supermegatron4000.FileManager.SensorDataFactory;
 import com.example.supermegatron4000.FileManager.UserFactory;
-import com.example.supermegatron4000.FileManager.main;
-import com.example.supermegatron4000.FileManager.myRoom;
+import com.example.supermegatron4000.model.myRoom;
 import com.example.supermegatron4000.FileManager.RoomDao;
 import com.example.supermegatron4000.FileManager.SensorDataDao;
-import com.example.supermegatron4000.FileManager.User;
+import com.example.supermegatron4000.model.User;
 import com.example.supermegatron4000.FileManager.UserDao;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
 
 import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
-import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
 

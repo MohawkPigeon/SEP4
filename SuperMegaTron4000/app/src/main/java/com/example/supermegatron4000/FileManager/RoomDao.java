@@ -3,6 +3,8 @@ package com.example.supermegatron4000.FileManager;
 import androidx.room.Dao;
 import androidx.room.Query;
 
+import com.example.supermegatron4000.model.myRoom;
+
 import java.util.List;
 
 @Dao

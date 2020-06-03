@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -12,17 +11,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logappdev2.R;
 import com.example.supermegatron4000.adapters.RoomsListAdapter;
-import com.example.supermegatron4000.model.Room_simple;
+import com.example.supermegatron4000.model.myRoom;
 import com.example.supermegatron4000.viewModel.RoomsViewModel;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class RoomsView extends Fragment {
@@ -44,9 +41,9 @@ public class RoomsView extends Fragment {
         mRooms = new ViewModelProvider(this).get(RoomsViewModel.class);
         mRooms.init();
 
-        mRooms.getRooms().observe(getViewLifecycleOwner(), new Observer<List<Room_simple>>() {
+        mRooms.getRooms().observe(getViewLifecycleOwner(), new Observer<List<myRoom>>() {
             @Override
-            public void onChanged(List<Room_simple> room_simples) {
+            public void onChanged(List<myRoom> myRooms) {
                 adapter.notifyDataSetChanged();
                 pBar.setVisibility(View.VISIBLE);
                 update();

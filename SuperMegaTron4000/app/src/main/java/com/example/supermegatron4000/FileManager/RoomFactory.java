@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.supermegatron4000.model.myRoom;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 

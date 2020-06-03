@@ -3,12 +3,11 @@ package com.example.supermegatron4000;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.supermegatron4000.ConnectionPack.ConnectionManager;
-import com.example.supermegatron4000.FileManager.Action;
-import com.example.supermegatron4000.FileManager.SensorData;
+import com.example.supermegatron4000.model.SensorData;
 import com.example.supermegatron4000.FileManager.UserDao;
-import com.example.supermegatron4000.FileManager.User;
-import com.example.supermegatron4000.FileManager.myRoom;
-
+import com.example.supermegatron4000.model.User;
+import com.example.supermegatron4000.model.myRoom;
+import com.example.supermegatron4000.model.Action;
 import java.util.List;
 
 public class ReferenceManager { // måske bare lad være med at bruge denne klasse.

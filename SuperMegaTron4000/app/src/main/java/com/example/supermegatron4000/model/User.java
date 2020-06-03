@@ -1,63 +1,85 @@
 package com.example.supermegatron4000.model;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class User {
-    private String username;
-    private String password;
-    private Boolean installer;
-    private Boolean rooms;
-    private ArrayList<Action> Actions;
+import java.io.Serializable;
+import java.util.List;
 
-    public User(String username, String password, Boolean installer, Boolean rooms, ArrayList<Action> actions) {
+//@Entity(primaryKeys = {"username", "password"})
+@Entity(tableName = "user")
+public class User implements Serializable {
+
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    public int id;
+
+    @ColumnInfo(name = "username")
+    public String username;
+
+    @ColumnInfo(name = "password")
+    public String password;
+
+    @ColumnInfo(name = "rooms")
+    public String rooms;
+
+    @ColumnInfo(name = "role")
+    public String role;
+
+
+    public User(String username, String password, String rooms, String role) {
         this.username = username;
         this.password = password;
-        this.installer = installer;
         this.rooms = rooms;
-        Actions = actions;
+        this.role = role;
     }
 
+    public User(){};
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @NonNull
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(@NonNull String username) {
         this.username = username;
     }
 
+    @NonNull
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@NonNull String password) {
         this.password = password;
     }
 
-    public Boolean getInstaller() {
-        return installer;
-    }
-
-    public void setInstaller(Boolean installer) {
-        this.installer = installer;
-    }
-
-    public Boolean getRooms() {
+    public String getRooms() {
         return rooms;
     }
 
-    public void setRooms(Boolean rooms) {
+    public void setRooms(String rooms) {
         this.rooms = rooms;
     }
 
-    public ArrayList<Action> getActions() {
-        return Actions;
+    public String getRole() {
+        return role;
     }
 
-    public void setActions(ArrayList<Action> actions) {
-        Actions = actions;
-    }
-
-    public void addAction(Action action){
-        Actions.add(action);
+    public void setRole(String role) {
+        this.role = role;
     }
 }
+
+

@@ -1,4 +1,4 @@
-package com.example.supermegatron4000.FileManager;
+package com.example.supermegatron4000.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

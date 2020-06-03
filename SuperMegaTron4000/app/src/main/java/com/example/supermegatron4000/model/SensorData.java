@@ -1,46 +1,79 @@
 package com.example.supermegatron4000.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
+@Entity(tableName = "sensorData")
 public class SensorData implements Serializable {
 
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    public int id;
+
+    @ColumnInfo(name = "dateTime")
     @SerializedName("sensorDatatimestamp")
-    @Expose public Timestamp dateTime;
+    @Expose public String dateTime;
 
+    @ColumnInfo(name = "humidity")
     @SerializedName("humidity")
-    @Expose public int luftfugtighed;
+    @Expose public int humidity;
 
+    @ColumnInfo(name = "CO2")
     @SerializedName("cO2")
     @Expose public int CO2;
 
+    @ColumnInfo(name = "audiolevel")
     @SerializedName("audioLevel")
-    @Expose public int audioLevel;
+    @Expose
+    public int audiolevel;
 
-    public SensorData(Timestamp dateTime, int luftfugtighed, int CO2, int audioLevel) {
+    @ColumnInfo(name = "temperature")
+    public int temperature;
+
+    @ColumnInfo(name = "isOccupied")
+    public boolean isOccupied;
+
+    public SensorData(String dateTime, int humidity, int CO2, int audiolevel, int temperature, boolean isOccupied) {
         this.dateTime = dateTime;
-        this.luftfugtighed = luftfugtighed;
+        this.humidity = humidity;
         this.CO2 = CO2;
-        this.audioLevel = audioLevel;
+        this.audiolevel = audiolevel;
+        this.temperature = temperature;
+        this.isOccupied = isOccupied;
     }
 
-    public Timestamp getDateTime() {
+    public SensorData(){};
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Timestamp dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
-    public int getLuftfugtighed() {
-        return luftfugtighed;
+    public int getHumidity() {
+        return humidity;
     }
 
-    public void setLuftfugtighed(int luftfugtighed) {
-        this.luftfugtighed = luftfugtighed;
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
     }
 
     public int getCO2() {
@@ -51,11 +84,27 @@ public class SensorData implements Serializable {
         this.CO2 = CO2;
     }
 
-    public int getAudioLevel() {
-        return audioLevel;
+    public int getAudiolevel() {
+        return audiolevel;
     }
 
-    public void setAudioLevel(int audioLevel) {
-        this.audioLevel = audioLevel;
+    public void setAudiolevel(int audiolevel) {
+        this.audiolevel = audiolevel;
+    }
+
+    public int getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
+
+    public boolean isOccupied() {
+        return isOccupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        isOccupied = occupied;
     }
 }
