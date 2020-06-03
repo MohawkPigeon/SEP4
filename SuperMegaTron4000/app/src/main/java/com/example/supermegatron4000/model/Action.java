@@ -5,6 +5,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 @Entity(tableName = "action")
@@ -13,10 +16,12 @@ public class Action implements Serializable {
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    public int id;
+    @SerializedName("RoomID")
+    @Expose int id;
 
     @ColumnInfo(name = "command")
-    public String command;
+    @SerializedName("Command")
+    @Expose public String command;
 
     public Action(@NonNull String command) {
         this.command = command;
