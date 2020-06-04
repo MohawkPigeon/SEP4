@@ -19,7 +19,7 @@ public class SensorData implements Serializable {
     public int id;
 
     @ColumnInfo(name = "dateTime")
-    @SerializedName("sensorDatatimestamp")
+    @SerializedName("timestamp")
     @Expose public String dateTime;
 
     @ColumnInfo(name = "humidity")
@@ -32,11 +32,12 @@ public class SensorData implements Serializable {
 
     @ColumnInfo(name = "audiolevel")
     @SerializedName("audioLevel")
-    @Expose
-    public int audiolevel;
+    @Expose public int audiolevel;
+
 
     @ColumnInfo(name = "temperature")
-    public int temperature;
+    @SerializedName("temperature")
+    @Expose public int temperature;
 
     @ColumnInfo(name = "isOccupied")
     public boolean isOccupied;

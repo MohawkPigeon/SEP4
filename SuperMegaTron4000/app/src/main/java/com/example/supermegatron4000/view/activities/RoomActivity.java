@@ -1,5 +1,6 @@
 package com.example.supermegatron4000.view.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -11,10 +12,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.logappdev2.R;
+import com.example.supermegatron4000.model.myRoom;
 
 import pl.pawelkleczkowski.customgauge.CustomGauge;
 
 public class RoomActivity extends AppCompatActivity {
+
 
     private int i = 0;
     @Override
@@ -25,51 +28,18 @@ public class RoomActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        final TextView gaugeText = findViewById(R.id.gaugeText);
-        final CustomGauge gauge = findViewById(R.id.customGauge);
+        myRoom room = (myRoom) getIntent().getSerializableExtra("Selected_Room");
+
+
+
+        TextView data = findViewById(R.id.dataView);
+        TextView roomName = findViewById(R.id.roomNameTextView);
         Button minus = findViewById(R.id.minusBtn);
         Button plus = findViewById(R.id.plusBtn);
-        gaugeText.setText(String.valueOf(gauge.getValue()));
+        roomName.setText(room.getRoomName());
+        data.setText(room.getsData());
 
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gauge.setStartValue(0);
-                gauge.setEndValue(100);
-                if (i==gauge.getEndValue()){
 
-                }
-                else {
-                    gauge.setValue(i+5);
-                    gaugeText.setText(String.valueOf(gauge.getValue()));
-                    i+=5;
-                }
-            }
-        });
-
-        minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gauge.setStartValue(0);
-                gauge.setEndValue(100);
-                if (i==gauge.getStartValue()){
-
-                }
-                else {
-                    gauge.setValue(i-5);
-                    gaugeText.setText(String.valueOf(gauge.getValue()));
-                    i-=5;
-                }
-            }
-        });
-
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.ActionsList, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter);
     }
+
 }
