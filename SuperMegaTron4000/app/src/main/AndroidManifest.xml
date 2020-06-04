@@ -17,7 +17,7 @@
         <activity
             android:name="com.example.supermegatron4000.view.activities.HomePage"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.example.supermegatron4000.view.activities.LoginView">
+        <activity android:name="com.example.supermegatron4000.view.activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
