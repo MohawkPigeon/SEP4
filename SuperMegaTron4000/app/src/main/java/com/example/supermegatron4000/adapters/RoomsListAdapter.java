@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyVi
     private List<myRoom> mRoomList;
     Context mContext;
 
+
     ItemClicked activity;
     public interface ItemClicked{
         void onItemClicked(int index);
@@ -32,6 +34,7 @@ public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyVi
     public RoomsListAdapter(Context context, List<myRoom> roomList) {
         this.mContext = context;
         this.mRoomList = roomList;
+
     }
 
     @NonNull
@@ -43,7 +46,6 @@ public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull RoomsListAdapter.MyViewHolder holder, int position) {
-        holder.itemView.setTag(mRoomList.get(position));
         myRoom mCurrent = mRoomList.get(position);
         holder.btn.setText(mCurrent.getRoomName());
     }
@@ -72,8 +74,15 @@ public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyVi
                 @Override
                 public void onClick(View v) {
 
+                    int position = getAdapterPosition();
                     Intent intent = new Intent(v.getContext(), RoomActivity.class);
-                    v.getContext().startActivity(intent);
+                    intent.putExtra("Selected_Room",mRoomList.get(position));
+
+
+                    if (position != RecyclerView.NO_POSITION) {
+                        Toast.makeText(v.getContext(), "You clicked " + mRoomList.get(position).getRoomName(), Toast.LENGTH_SHORT).show();
+                        v.getContext().startActivity(intent);
+                    }
                 }
             });
         }
@@ -83,5 +92,9 @@ public class RoomsListAdapter extends RecyclerView.Adapter<RoomsListAdapter.MyVi
         }
 
 
+    }
+
+    public interface OnRoomListener{
+        void onRoomClick(int position);
     }
 }

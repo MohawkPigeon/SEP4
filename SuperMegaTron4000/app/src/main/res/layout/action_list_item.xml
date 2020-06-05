@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/Transparent"
+    android:background="@color/VeryTransparent"
     android:orientation="horizontal">
 
 
@@ -24,7 +24,7 @@
         android:layout_height="60dp"
         android:layout_weight="1"
         android:background="#00495867"
-        android:tint="#7E2525"
+        android:tint="@color/gradientStart"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <ImageButton
@@ -34,7 +34,7 @@
         android:layout_height="60dp"
         android:layout_weight="1"
         android:background="#00495867"
-        android:tint="#7E2525"
+        android:tint="@color/gradientStart"
         app:srcCompat="@android:drawable/ic_menu_delete" />
 
 </LinearLayout>

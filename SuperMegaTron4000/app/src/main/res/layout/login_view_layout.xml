@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.LoginView">
+    tools:context=".view.activities.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -31,7 +31,7 @@
             style="@style/TextInput"
             android:backgroundTint="@color/colorPrimaryDark"
             android:fontFamily="monospace"
-            android:hint="Username"
+            android:hint="Email"
             android:inputType="text"
             android:textColor="@color/White"
             android:textColorHint="@color/White" />
@@ -62,15 +62,6 @@
             android:layout_height="wrap_content"
             android:buttonTint="#FFFFFF"
             android:text="Remember Me"
-            android:textColor="@color/White" />
-
-        <CheckBox
-            android:id="@+id/adminBtn"
-            android:layout_width="156dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:buttonTint="#FFFFFF"
-            android:text="Admin?"
             android:textColor="@color/White" />
 
     </LinearLayout>
