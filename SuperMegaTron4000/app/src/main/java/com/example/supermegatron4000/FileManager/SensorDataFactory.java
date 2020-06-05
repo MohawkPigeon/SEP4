@@ -32,6 +32,20 @@ public class SensorDataFactory extends AppCompatActivity {
         return null;
     }
 
+    public List<SensorData> getWhereId(Integer sensorDataId){
+
+        getWhereIdTask getWhereIdTask = new getWhereIdTask();
+        getWhereIdTask.execute(sensorDataId);
+        try {
+            return getWhereIdTask.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     class InsertAsyncTask extends AsyncTask<SensorData, Void, Void>{
 
         @Override
@@ -56,6 +70,18 @@ public class SensorDataFactory extends AppCompatActivity {
 
     }
 
+
+    class getWhereIdTask extends AsyncTask<Integer, Void, List<SensorData>> {
+
+        @Override
+        protected List<SensorData> doInBackground(Integer... integer){
+
+            return AppDatabase.getInstance(getApplicationContext())
+                    .SensorDataDao()
+                    .loadAllByIds(integer);
+        }
+
+    }
 
 }
 

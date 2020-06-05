@@ -23,7 +23,18 @@ public class RoomFactory extends AppCompatActivity {
         getAllAsyncTask getAllAsyncTask = new getAllAsyncTask();
         getAllAsyncTask.execute();
         try {
-            return getAllAsyncTask.get();
+            ActionFactory actionFactory = new ActionFactory();
+            SensorDataFactory sensorDataFactory = new SensorDataFactory();
+            List<myRoom> roomList = null;
+            for (int i = 0; i < getAllAsyncTask.get().size(); i++){
+                myRoom myRoom = getAllAsyncTask.get().get(i);
+                myRoom.actionList = actionFactory.getWhereId(myRoom.actions);
+                myRoom.sensorDataList = sensorDataFactory.getWhereId(myRoom.sData);
+
+                roomList.add(myRoom);
+            }
+            return roomList;
+
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

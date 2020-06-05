@@ -30,6 +30,20 @@ public class ActionFactory extends AppCompatActivity {
         return null;
     }
 
+    public List<Action> getWhereId(Integer actions){
+
+        getWhereIdTask getWhereIdTask = new getWhereIdTask();
+        getWhereIdTask.execute(actions);
+        try {
+            return getWhereIdTask.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     class InsertAsyncTask extends AsyncTask<Action, Void, Void>{
 
         @Override
@@ -53,6 +67,20 @@ public class ActionFactory extends AppCompatActivity {
         }
 
     }
+
+    class getWhereIdTask extends AsyncTask<Integer, Void, List<Action>> {
+
+        @Override
+        protected List<Action> doInBackground(Integer... ints){
+
+            return AppDatabase.getInstance(getApplicationContext())
+                    .ActionDao()
+                    .loadAllByIds(ints);
+        }
+
+    }
+
+
 
 
 }

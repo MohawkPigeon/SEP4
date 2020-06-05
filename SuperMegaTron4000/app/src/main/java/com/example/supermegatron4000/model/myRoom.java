@@ -3,7 +3,9 @@ package com.example.supermegatron4000.model;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -31,19 +33,35 @@ public class myRoom implements Serializable {
     public int maxThreshold;
 
     @ColumnInfo(name = "actions")
-    public String actions;
+    public int actions;
 
     @SerializedName("sensorData")
     @ColumnInfo(name = "sData")
-    @Expose public String sData;
+    @Expose public int sData;
 
+    @Ignore
+    public List<Action> actionList;
 
-    public myRoom(String roomName, int minThreshold, int maxThreshold, String actions, String sData) {
+    @Ignore
+    public List<SensorData> sensorDataList;
+
+    //Brug denne til at uploade
+    public myRoom(String roomName, int minThreshold, int maxThreshold, int actions, int sData) {
         this.roomName = roomName;
         this.minThreshold = minThreshold;
         this.maxThreshold = maxThreshold;
         this.actions = actions;
         this.sData = sData;
+    }
+
+    //Brug denne til at downloade
+    public myRoom(int id, String roomName, int minThreshold, int maxThreshold, List<Action> actionList, List<SensorData> sensorDataList) {
+        this.id = id;
+        this.roomName = roomName;
+        this.minThreshold = minThreshold;
+        this.maxThreshold = maxThreshold;
+        this.actionList = actionList;
+        this.sensorDataList = sensorDataList;
     }
 
     public myRoom(){}
@@ -80,19 +98,19 @@ public class myRoom implements Serializable {
         this.maxThreshold = maxThreshold;
     }
 
-    public String getActions() {
+    public int getActions() {
         return actions;
     }
 
-    public void setActions(String actions) {
+    public void setActions(int actions) {
         this.actions = actions;
     }
 
-    public String getsData() {
+    public int getsData() {
         return sData;
     }
 
-    public void setsData(String sData) {
+    public void setsData(int sData) {
         this.sData = sData;
     }
 }

@@ -13,7 +13,7 @@ public abstract class SensorDataDao implements BaseDao<SensorData> {
     public abstract List<SensorData> getAll();
 
     @Query("SELECT * FROM sensorData WHERE id IN (:sensorIds)")
-    public abstract List<SensorData> loadAllByIds(int[] sensorIds);
+    public abstract List<SensorData> loadAllByIds(Integer... sensorIds);
 
     @Query("SELECT * FROM sensorData WHERE dateTime LIKE :first AND " +
             "isOccupied LIKE :last LIMIT 1")
