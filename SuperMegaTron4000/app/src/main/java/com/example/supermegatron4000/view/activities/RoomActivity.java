@@ -10,8 +10,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.logappdev2.R;
+import com.example.supermegatron4000.ConnectionPack.ConnectionManager;
 import com.example.supermegatron4000.model.myRoom;
 
 import pl.pawelkleczkowski.customgauge.CustomGauge;
@@ -30,14 +32,16 @@ public class RoomActivity extends AppCompatActivity {
 
         myRoom room = (myRoom) getIntent().getSerializableExtra("Selected_Room");
 
-
+        ConnectionManager connectionManager = new ConnectionManager();
+        MutableLiveData<myRoom> myRoomMutableLiveData = new MutableLiveData<>();
+        connectionManager.getRoom(1,myRoomMutableLiveData);
 
         TextView data = findViewById(R.id.dataView);
         TextView roomName = findViewById(R.id.roomNameTextView);
         Button minus = findViewById(R.id.minusBtn);
         Button plus = findViewById(R.id.plusBtn);
         roomName.setText(room.getRoomName());
-        data.setText(room.getsData());
+       // data.setText(room.getsData());
 
 
     }
