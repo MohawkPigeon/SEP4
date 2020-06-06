@@ -35,15 +35,16 @@ public class myRoom implements Serializable {
     @ColumnInfo(name = "actions")
     public int actions;
 
-    @SerializedName("sensorData")
+
     @ColumnInfo(name = "sData")
-    @Expose public int sData;
+    public int sData;
 
     @Ignore
     public List<Action> actionList;
 
     @Ignore
-    public List<SensorData> sensorDataList;
+    @SerializedName("sensorData")
+    @Expose public List<SensorData> sensorDataList;
 
     //Brug denne til at uploade
     public myRoom(String roomName, int minThreshold, int maxThreshold, int actions, int sData) {
@@ -108,6 +109,10 @@ public class myRoom implements Serializable {
 
     public int getsData() {
         return sData;
+    }
+
+    public List<SensorData> getSensordata(){
+        return sensorDataList;
     }
 
     public void setsData(int sData) {

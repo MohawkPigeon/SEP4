@@ -61,6 +61,17 @@ public class ReferenceManager { // måske bare lad være med at bruge denne klas
         }
     }
 
+    private void getRoom(int RoomID, final MutableLiveData<myRoom> room){
+        connectionManager.getRoom(RoomID, room);
+    }
+    private void getAllAction(final MutableLiveData<List<Action>> action){
+        connectionManager.getAllAction(action);
+    }
+    private void getAction(int actionID, final MutableLiveData<Action> action){
+        connectionManager.getAction(actionID, action);
+    }
+
+
     List<myRoom> getSavedRooms(){
         return roomFactory.getAllRooms();
     }

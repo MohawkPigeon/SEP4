@@ -61,6 +61,9 @@ public class ConnectionManager {
     public void getRoom(int roomID, final MutableLiveData<myRoom> room){
         readRoom(roomID,room);
     }
+    public void getAllAction(final MutableLiveData<List<Action>> action){
+        readAllAction(action);
+    }
     public void getAction(int actionID, final MutableLiveData<Action> action){
         readAction(actionID,action);
     }
@@ -195,6 +198,7 @@ public class ConnectionManager {
             public void onResponse(Call<myRoom> call, Response<myRoom> response) {
                 if(response.isSuccessful()){
                     room.setValue(response.body());
+
                 } else {
                     System.out.println("Response was not succesfull.\n");
                 }
@@ -340,6 +344,21 @@ public class ConnectionManager {
             }
         });
     }
+    private void readAllAction(final MutableLiveData<List<Action>> action){
+
+        Call<List<Action>> req = aS.getAllAction();
+        req.enqueue(new Callback<List<Action>>() {
+            @Override
+            public void onResponse(Call<List<Action>> call, Response<List<Action>> response) {
+                action.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Action>> call, Throwable t) {
+                System.out.println("Call faliled recieved: " + t);
+            }
+        });
+    }
     private void readAction(int actionId, final MutableLiveData<Action> action){
 
         Call<Action> req = aS.getAction(actionId);
@@ -436,13 +455,13 @@ public class ConnectionManager {
 }
 
 interface roomService{
-    @POST("rooms/new")
+    @POST("room/new")
     Call<myRoom> createRoom(@Body myRoom room);
 
     @GET("room")
     Call<List<myRoom>> getAllRooms ();
 
-    @GET("rooms/{room}")
+    @GET("room/{room}")
     Call<myRoom> getRoom (@Path("room") int room);
 
     @PUT("update/{id}")
@@ -452,10 +471,10 @@ interface roomService{
     Call<myRoom> deleteRoom(@Path("id") int id);
 }
 interface userService {
-    @POST("users/new")
+    @POST("user/new")
     Call<User> createUser(@Body User user);
 
-    @GET("users/{user}")
+    @GET("user/{user}")
     Call<User> getUser(@Path("user") String user);
 
     @PUT("update/{id}")
@@ -472,7 +491,7 @@ interface dataService {
     Call<SensorData> createSensorData(@Body SensorData sensorData);
 
     @GET("sensordata")
-    Call<List<SensorData>> getAllSensorData (@Path("sensorData") int sensorData);
+    Call<List<SensorData>> getAllSensorData ();
 
     @GET("sensorData/{sensorData}")
     Call<SensorData> getSensorData (@Path("sensorData") int sensorData);
@@ -488,7 +507,7 @@ interface actionService{
     Call<Action> createAction(@Body Action action);
 
     @GET("actiontrigger")
-    Call<List<Action>> getAllAction (@Path("action") int action);
+    Call<List<Action>> getAllAction ();
 
     @GET("actiontrigger/{action}")
     Call<Action> getAction (@Path("action") int action);
