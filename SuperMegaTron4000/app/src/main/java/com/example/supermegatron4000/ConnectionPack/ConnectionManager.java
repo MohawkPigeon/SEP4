@@ -455,7 +455,7 @@ public class ConnectionManager {
 }
 
 interface roomService{
-    @POST("room/new")
+    @POST("room")
     Call<myRoom> createRoom(@Body myRoom room);
 
     @GET("room")
@@ -471,7 +471,7 @@ interface roomService{
     Call<myRoom> deleteRoom(@Path("id") int id);
 }
 interface userService {
-    @POST("user/new")
+    @POST("user")
     Call<User> createUser(@Body User user);
 
     @GET("user/{user}")
@@ -487,7 +487,7 @@ interface userService {
     Call<User> loginUser(@Query("username") String username,@Query("password") String password);
 }
 interface dataService {
-    @POST("sensorData/new")
+    @POST("sensorData")
     Call<SensorData> createSensorData(@Body SensorData sensorData);
 
     @GET("sensordata")
@@ -503,7 +503,7 @@ interface dataService {
     Call<SensorData> deleteSensorData(@Path("id") int id);
 }
 interface actionService{
-    @POST("actiontrigger/new")
+    @POST("actiontrigger")
     Call<Action> createAction(@Body Action action);
 
     @GET("actiontrigger")
