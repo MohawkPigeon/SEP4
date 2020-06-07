@@ -465,10 +465,10 @@ interface roomService{
     @GET("room/{room}")
     Call<myRoom> getRoom (@Path("room") int room);
 
-    @PUT("update/{id}")
+    @PUT("room/{id}")
     Call<myRoom> updateRoom(@Path("id") int id, @Body myRoom room);
 
-    @DELETE("delete/{id}")
+    @DELETE("room/{id}")
     Call<myRoom> deleteRoom(@Path("id") int id);
 }
 interface userService {
@@ -478,10 +478,10 @@ interface userService {
     @GET("user/{user}")
     Call<User> getUser(@Path("user") String user);
 
-    @PUT("update/{id}")
+    @PUT("user/{id}")
     Call<User> updateUser(@Path("id") String id, @Body User user);
 
-    @DELETE("delete/{id}")
+    @DELETE("user/{id}")
     Call<User> deleteUser(@Path("id") String id);
 
     @GET("user/{username}/{password}")
@@ -497,10 +497,10 @@ interface dataService {
     @GET("sensorData/{sensorData}")
     Call<SensorData> getSensorData (@Path("sensorData") int sensorData);
 
-    @PUT("update/{id}")
+    @PUT("sensorData/{id}")
     Call<SensorData> updateSensorData(@Path("id") int id, @Body SensorData sensorData);
 
-    @DELETE("delete/{id}")
+    @DELETE("sensorData/{id}")
     Call<SensorData> deleteSensorData(@Path("id") int id);
 }
 interface actionService{
