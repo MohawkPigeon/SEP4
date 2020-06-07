@@ -198,8 +198,6 @@ public class ConnectionManager {
             public void onResponse(Call<myRoom> call, Response<myRoom> response) {
                 if(response.isSuccessful()){
                     room.setValue(response.body());
-                    System.out.println("Print CO2 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                    System.out.println(room.getValue().getSensordata().get(1).getCO2());
                 } else {
                     System.out.println("Response was not succesfull.\n");
                 }
