@@ -205,7 +205,7 @@ public class ConnectionManager {
 
             @Override
             public void onFailure(Call<myRoom> call, Throwable t) {
-                System.out.println("Call faliled recieved: " + t);
+                System.out.println("Call failed recieved: " + t);
             }
         });
     }

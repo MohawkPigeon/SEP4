@@ -14,7 +14,7 @@ import com.example.supermegatron4000.model.myRoom;
 import com.example.supermegatron4000.model.Action;
 import java.util.List;
 
-public class ReferenceManager { // måske bare lad være med at bruge denne klasse.
+public class ReferenceManager {
 
     String username = "sep4@gmail.com"; // hardcoded da authentifikation blev irrellevant
     String password = "password";
