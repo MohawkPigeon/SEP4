@@ -11,7 +11,6 @@ import java.util.concurrent.ExecutionException;
 
 public class RoomFactory extends AppCompatActivity {
 
-
     public void insertRoom(myRoom room){
 
         InsertAsyncTask insertAsyncTask = new InsertAsyncTask();
@@ -35,9 +34,7 @@ public class RoomFactory extends AppCompatActivity {
             }
             return roomList;
 
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;

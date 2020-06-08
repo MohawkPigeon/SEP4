@@ -24,11 +24,12 @@ public abstract class AppDatabase extends RoomDatabase {
         if(INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if(INSTANCE == null) {
-                    INSTANCE = Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class).enableMultiInstanceInvalidation().build();
+                    INSTANCE = Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class)
+                            .enableMultiInstanceInvalidation().build();
                 }
             }
         }
         return INSTANCE;
     }
-
 }
+

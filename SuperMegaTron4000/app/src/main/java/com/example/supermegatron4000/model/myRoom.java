@@ -35,7 +35,6 @@ public class myRoom implements Serializable {
     @ColumnInfo(name = "actions")
     public int actions;
 
-
     @ColumnInfo(name = "sData")
     public int sData;
 
